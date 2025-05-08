@@ -1,0 +1,360 @@
+/* Define custom properties for theming */
+:root {
+    --bg: #f4f6f8;
+    --fg: #1e1e2f;
+    --accent: #5c6bc0;
+    --card: #ffffff;
+    --hover: #e8eaf6;
+}
+
+/* Light Theme (default) */
+body.light-theme {
+    --bg: #f4f6f8;
+    --fg: #1e1e2f;
+    --accent: #5c6bc0;
+    --card: #ffffff;
+    --hover: #e8eaf6;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    --bg: #1e1e2f;
+    --fg: #f4f6f8;
+    --accent: #5c6bc0;
+    --card: #2a2a3d;
+    --hover: #3a3a4d;
+}
+
+/* High-Contrast Theme */
+body.high-contrast-theme {
+    --bg: #000000;
+    --fg: #ffffff;
+    --accent: #ff00ff;
+    --card: #333333;
+    --hover: #555555;
+}
+
+/* Pastel Theme */
+body.pastel-theme {
+    --bg: #f0f4f8;
+    --fg: #4a4e69;
+    --accent: #9a8c98;
+    --card: #ffffff;
+    --hover: #e8ecef;
+}
+
+/* Solarized Theme */
+body.solarized-theme {
+    --bg: #002b36;
+    --fg: #839496;
+    --accent: #268bd2;
+    --card: #073642;
+    --hover: #084552;
+}
+
+/* General styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--fg);
+    transition: background 0.4s, color 0.4s;
+}
+
+header {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: #3f51b5;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    justify-items: center;
+    align-items: start;
+    min-height: calc(100vh - 80px); /* Ensure it fills the viewport without scrolling */
+    overflow-y: hidden; /* Remove vertical scrolling */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+.card {
+    background-color: var(--card);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card svg {
+    width: 100%;
+    height: 250px;
+    display: block;
+}
+
+.chart-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.details-container {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--card);
+    color: var(--fg);
+    padding: 2rem;
+    border-top: 4px solid var(--accent);
+    transition: bottom 0.4s ease-in-out, height 0.4s ease-in-out; /* Add height transition */
+    z-index: 1000;
+    height: 50vh; /* Default height when opened */
+    min-height: 20vh; /* Minimum height */
+    max-height: 80vh; /* Maximum height */
+    overflow-y: hidden; /* Remove scrolling */
+    box-sizing: border-box;
+}
+
+.details-container.open {
+    bottom: 0;
+}
+
+.details-drag-handle {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 10px;
+    background-color: var(--accent);
+    border-radius: 5px;
+    cursor: ns-resize; /* Indicate draggable */
+}
+
+@keyframes subtleFade {
+    0% { background-color: var(--card); }
+    100% { background-color: var(--hover); }
+}
+
+.close-details {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #ffffff;
+    background-color: var(--accent);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s;
+    z-index: 1002;
+}
+
+.close-details:hover {
+    background-color: #3f51b5;
+    transform: scale(1.1);
+}
+
+.tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: var(--hover);
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.tab.active {
+    background-color: var(--accent);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    height: calc(100% - 3rem); /* Adjust for tabs height */
+    overflow-y: auto; /* Enable scrolling only within tab content if needed */
+    -webkit-overflow-scrolling: touch;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--hover);
+}
+
+th {
+    background-color: var(--accent);
+    color: white;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: var(--card);
+    color: var(--fg);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.2s;
+}
+
+.export-button {
+    cursor: pointer;
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+.export-button:hover {
+    background-color: #3f51b5;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Large Screens (e.g., 34-inch ultrawide display, 3440px wide) */
+@media (min-width: 1920px) {
+    .dashboard {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        padding: 3rem;
+    }
+
+    .card {
+        max-width: 400px;
+    }
+
+    .card svg {
+        height: 300px;
+    }
+
+    .chart-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* Tablets (768px to 1024px) */
+@media (max-width: 1024px) {
+    .dashboard {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .card {
+        max-width: 300px;
+    }
+
+    .card svg {
+        height: 200px;
+    }
+
+    .chart-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile Devices (up to 768px) */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        min-height: calc(100vh - 60px);
+    }
+
+    .card {
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .card svg {
+        height: 180px;
+    }
+
+    .chart-title {
+        font-size: 1rem;
+    }
+
+    header {
+        padding: 0.5rem 1rem;
+    }
+
+    .theme-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .details-container {
+        padding: 1rem;
+    }
+
+    .close-details {
+        width: 30px;
+        height: 30px;
+        font-size: 1.5rem;
+        top: 10px;
+        right: 10px;
+    }
+
+    .tab-content {
+        height: calc(100% - 2.5rem); /* Adjust for smaller tabs on mobile */
+    }
+}
