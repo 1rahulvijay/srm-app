@@ -5,28 +5,19 @@ app = Flask(__name__)
 
 @app.route('/embed')
 def embed():
-    # Replace with a valid Tableau Server username
-    tableau_user = 'your_tableau_username'
-
-    # Tableau server root (no trailing slash)
+    tableau_user = 'flask_embed_user'
     tableau_server = 'https://your-tableau-server'
-
-    # This should match what's whitelisted in Tableau's "Trusted Authentication"
     payload = {
         'username': tableau_user,
-        'target_site': ''  # Leave empty for default site, else use site name
+        'target_site': ''
     }
+    r = requests.post(f"{tableau_server}/trusted", data=payload, verify=True)
+    ticket = r.text.strip()
 
-    # Request the trusted ticket
-    response = requests.post(f"{tableau_server}/trusted", data=payload, verify=False)
-    ticket = response.text.strip()
+    if not ticket.isdigit():
+        return "Error getting ticket", 403
 
-    if not ticket or not ticket.isdigit():
-        return f"Failed to get trusted ticket: {ticket}", 403
-
-    # Embed URL with the trusted ticket
-    workbook = "SalesWorkbook"
-    view = "Overview"
-    tableau_url = f"{tableau_server}/trusted/{ticket}/views/{workbook}/{view}?embed=yes"
+    # This URL is now only used **by the browser on first page load**
+    tableau_url = f"{tableau_server}/trusted/{ticket}/views/YourWorkbook/YourView?:embed=yes"
 
     return render_template('dashboard.html', tableau_url=tableau_url)
