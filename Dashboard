@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Tableau Embedded</title>
-  <script type="text/javascript" src="https://your-tableau-server/javascripts/api/tableau.embedding.min.js"></script>
-</head>
-<body>
-  <div id="vizContainer" style="width: 100%; height: 800px;"></div>
+<div id="vizContainer" style="width:100%; height:800px;"></div>
 
-  <script type="text/javascript">
-    const containerDiv = document.getElementById("vizContainer");
-    const vizUrl = "{{ tableau_url }}"; // Flask injects trusted URL here
+<script src="https://your-tableau-server/javascripts/api/tableau.embedding.min.js"></script>
+<script>
+  const container = document.getElementById('vizContainer');
+  const url = "{{ tableau_url }}";
 
-    const options = {
-      hideTabs: true,
-      onFirstInteractive: () => {
-        console.log("Tableau Viz Loaded");
-      }
-    };
+  const options = {
+    hideTabs: true,
+    width: "100%",
+    height: "800px",
+    onFirstInteractive: () => console.log("Viz loaded")
+  };
 
-    new tableau.Viz(containerDiv, vizUrl, options);
-  </script>
-</body>
-</html>
+  new tableau.Viz(container, url, options);
+</script>
