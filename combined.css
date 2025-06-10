@@ -1,0 +1,98 @@
+/* Tabloid-specific layout (11x17 inches at 72 DPI) */
+body {
+    margin: 0;
+    padding: 20mm;
+    min-height: 1224px; /* 17 inches */
+    width: 792px; /* 11 inches */
+    box-sizing: border-box;
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--fg);
+}
+
+/* Header adjustments for tabloid */
+header {
+    padding: 10mm;
+    margin-bottom: 5mm;
+    max-width: 100%;
+}
+
+/* Navbar adjustments */
+.navbar {
+    padding: 5mm 10mm;
+    margin-bottom: 5mm;
+    height: 40px;
+    max-width: 100%;
+}
+
+.navbar a {
+    padding: 5mm;
+    font-size: 1.1rem;
+}
+
+/* Metrics grid for tabloid */
+.metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5mm;
+    margin-bottom: 10mm;
+    max-width: 100%;
+}
+
+.metric-card {
+    padding: 5mm;
+    font-size: 1.2rem;
+}
+
+/* Chart grid optimization for tabloid */
+.chart-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5mm;
+    padding: 0;
+    max-width: 100%;
+}
+
+.card {
+    padding: 5mm;
+    height: 300px; /* Adjusted for tabloid height */
+}
+
+.card svg {
+    height: 250px; /* Ensure charts fit within card */
+    width: 100%;
+}
+
+/* Details container for tabloid */
+.details-container {
+    max-height: 40vh;
+    padding: 5mm;
+    bottom: -100%;
+    max-width: 100%;
+}
+
+/* Ensure text and elements are legible in PDF */
+.card-header {
+    font-size: 1.3rem;
+}
+
+table {
+    font-size: 1.1rem;
+}
+
+th, td {
+    padding: 3mm;
+}
+
+/* Media query for smaller screens during development */
+@media (max-width: 1366px) {
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+    .card {
+        height: 250px;
+    }
+    .card svg {
+        height: 200px;
+    }
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsightDash - Combined Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/combined.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="dashboard.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>InsightDash - Combined Dashboard</h1>
+        <div class="header-actions">
+            <button onclick="cycleTheme()">Toggle Theme</button>
+            <button onclick="refreshCharts()">Refresh Data</button>
+            <button onclick="exportToPDF()">Export to PDF</button>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="#" class="active">Client</a>
+        <a href="/productivity">Productivity</a>
+        <a href="/fte">FTE</a>
+        <a href="/sankey">Sankey</a>
+    </nav>
+
+    <div class="metrics-grid">
+        <div class="metric-card" id="metric-count-id">
+            <h3>ID Count</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-count-gf">
+            <h3>GF Count</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-count-gfc">
+            <h3>GFC Count</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-tasks-completed">
+            <h3>Tasks Completed</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-avg-completion-time">
+            <h3>Avg Completion Time</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-efficiency-rate">
+            <h3>Efficiency Rate</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-total-fte">
+            <h3>Total FTE</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-utilization">
+            <h3>Utilization</h3>
+            <p>Loading...</p>
+        </div>
+        <div class="metric-card" id="metric-overtime-hours">
+            <h3>Overtime Hours</h3>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <div class="chart-grid dynamic-layout grid-4">
+        <div class="card" id="line-chart">
+            <div class="card-header">📈 ID Count Trend</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="bar-chart">
+            <div class="card-header">📊 GF Count by Month</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="area-chart">
+            <div class="card-header">🍭 GFC Count Trend</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="scatter-chart">
+            <div class="card-header">📊 ID Distribution</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="productivity-line-chart">
+            <div class="card-header">📈 Tasks Completed Trend</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="productivity-bar-chart">
+            <div class="card-header">📊 Avg Completion Time by Month</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="productivity-area-chart">
+            <div class="card-header">🍭 Efficiency Rate Trend</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="fte-line-chart">
+            <div class="card-header">📈 Total FTE Trend</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="fte-bar-chart">
+            <div class="card-header">📊 Utilization by Month</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="fte-area-chart">
+            <div class="card-header">🍭 Overtime Hours Trend</div>
+            <div>Loading...</div>
+        </div>
+        <div class="card" id="sankey-chart">
+            <div class="card-header">📊 Client Flow Sankey Diagram</div>
+            <div>Loading...</div>
+        </div>
+    </div>
+
+    <div class="details-container" id="details">
+        <span class="close-details" onclick="closeDetails()">×</span>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('data-table')">Data Table</div>
+            <div class="tab" onclick="switchTab('overview-text')">Overview</div>
+        </div>
+        <div class="tab-content active" id="data-table">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Label</th><th>Value</th></tr>
+                    </thead>
+                    <tbody id="data-table-content"></tbody>
+                </table>
+            </div>
+            <button onclick="exportToExcel()">Export to CSV</button>
+        </div>
+        <div class="tab-content" id="overview-text">
+            Click a chart to see detailed information here...
+        </div>
+        <div id="alt-chart-content"></div>
+    </div>
+</body>
+</html>

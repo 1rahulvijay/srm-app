@@ -1,185 +1,112 @@
+<script>
+  const isEmbedded = new URLSearchParams(window.location.search).get("embed") === "true";
+  if (isEmbedded) {
+    document.documentElement.classList.add("embedded-mode");
+  }
+</script>
+
+
+
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Design</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insightful Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
 </head>
 
-<body>
-    <div class="container">
-        <section class="section-1">
-            <nav class="navbar">
-                <a href="#" class="navbar-link">Design</a>
-                <a href="#" class="navbar-link">Customers</a>
-                <a href="#" class="navbar-link">Team</a>
-                <a href="#" class="navbar-link">Contact </a>
-            </nav>
+<body class="light-theme">
+  <header>
+    <h1>InsightDash</h1>
+    <div class="header-actions">
+      <button class="theme-toggle" onclick="cycleTheme()">Toggle Theme</button>
+      <button class="refresh-data" onclick="refreshData()">Refresh Data</button>
+      <button class="focus-mode-toggle" onclick="toggleFocusMode()">Focus Mode</button>
 
-            <div class="floating-bg"></div>
-            <div class="floating-bg layer-1"></div>
-            <h1 class="section-1-heading">Shri Ram Machinery Mart</h1>
-            <div class="logo">
-                <i class="fas fa-bezier-curve"></i>
-            </div>
-        </section>
-
-        <section class="section-2">
-            <h1 class="section-heading">
-                Customers
-            </h1>
-            <div class="customers-wrapper">
-                <div class="customer">
-                    <i class="fas fa-quote-left"></i>
-                    <p class="customer-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora totam
-                        voluptatum accusantium pariatur, nulla quasi quibusdam ipsa quisquam repellat atque, tempore
-                        assumenda vitae. Earum fuga a accusamus, nisi ullam delectus!</p>
-                    <div class="customer-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <img src="images/customer-img-1.jpg" class="customer-img">
-                    <h4 class="customer-name">Jane Lee</h4>
-                </div>
-                <div class="customer">
-                    <i class="fas fa-quote-left"></i>
-                    <p class="customer-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora totam
-                        voluptatum accusantium pariatur, nulla quasi quibusdam ipsa quisquam repellat atque, tempore
-                        assumenda vitae. Earum fuga a accusamus, nisi ullam delectus!</p>
-                    <div class="customer-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <img src="images/customer-img-2.jpg" class="customer-img">
-                    <h4 class="customer-name">Bob Smith</h4>
-                </div>
-                <div class="customer">
-                    <i class="fas fa-quote-left"></i>
-                    <p class="customer-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora totam
-                        voluptatum accusantium pariatur, nulla quasi quibusdam ipsa quisquam repellat atque, tempore
-                        assumenda vitae. Earum fuga a accusamus, nisi ullam delectus!</p>
-                    <div class="customer-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <img src="images/customer-img-3.jpg" class="customer-img">
-                    <h4 class="customer-name">Ann Brown</h4>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3 -->
-        <section class="section-3" id="team">
-            <h1 class="section-heading">Team</h1>
-            <div class="team-wrapper">
-                <div class="team-member">
-                    <img src="images/team-member-1.jpg" class="team-member-img">
-                    <h2 class="team-member-name">Nick Smith <span>(Designer)</span></h2>
-                    <ul class="team-member-skills">
-                        <li>Ps</li>
-                        <li>Figma</li>
-                        <li>HTML5</li>
-                        <li>CSS3</li>
-                        <li>Ai</li>
-                    </ul>
-                    <a href="#" class="projects-btn">Projects</a>
-                    <div class="story-btn" title="My Story">
-                        <div class="story-btn-line"></div>
-                    </div>
-                    <div class="story">
-                        <h4 class="story-heading">About Me</h4>
-                        <p class="story-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Reprehenderit obcaecati blanditiis aspernatur ab doloribus optio nesciunt adipisci fugiat
-                            quia veritatis doloremque tempore ipsum sunt atque exercitationem perspiciatis, beatae
-                            aliquam voluptates perferendis. Doloribus exercitationem adipisci, quidem veritatis
-                            temporibus magni. Sunt, exercitationem?</p>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="images/team-member-2.jpg" class="team-member-img">
-                    <h2 class="team-member-name">Bob Brown <span>(Designer)</span></h2>
-                    <ul class="team-member-skills">
-                        <li>Ae</li>
-                        <li>Pr</li>
-                        <li>HTML5</li>
-                        <li>CSS3</li>
-                        <li>Inkscape</li>
-                    </ul>
-                    <a href="#" class="projects-btn">Projects</a>
-                    <div class="story-btn" title="My Story">
-                        <div class="story-btn-line"></div>
-                    </div>
-                    <div class="story">
-                        <h4 class="story-heading">About Me</h4>
-                        <p class="story-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Reprehenderit obcaecati blanditiis aspernatur ab doloribus optio nesciunt adipisci fugiat
-                            quia veritatis doloremque tempore ipsum sunt atque exercitationem perspiciatis, beatae
-                            aliquam voluptates perferendis. Doloribus exercitationem adipisci, quidem veritatis
-                            temporibus magni. Sunt, exercitationem?</p>
-                    </div>
-                </div>
-                <div class="team-member">
-                    <img src="images/team-member-3.jpg" class="team-member-img">
-                    <h2 class="team-member-name">John Doe <span>(Developer)</span></h2>
-                    <ul class="team-member-skills">
-                        <li>JavaScript</li>
-                        <li>ReactJS</li>
-                        <li>NodeJS</li>
-                        <li>MongoDB</li>
-                        <li>Python</li>
-                    </ul>
-                    <a href="#" class="projects-btn">Projects</a>
-                    <div class="story-btn" title="My Story">
-                        <div class="story-btn-line"></div>
-                    </div>
-                    <div class="story">
-                        <h4 class="story-heading">About Me</h4>
-                        <p class="story-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Reprehenderit obcaecati blanditiis aspernatur ab doloribus optio nesciunt adipisci fugiat
-                            quia veritatis doloremque tempore ipsum sunt atque exercitationem perspiciatis, beatae
-                            aliquam voluptates perferendis. Doloribus exercitationem adipisci, quidem veritatis
-                            temporibus magni. Sunt, exercitationem?</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Section 4 -->
-        <section class="section-4" id="contact">
-            <h1 class="section-heading">Contact</h1>
-            <div class="form-container">
-                <img src="images/form-img.png" class="form-img">
-                <form class="contact-form">
-                    <input type="text" placeholder="Your Name">
-                    <input type="email" placeholder="Your Email">
-                    <textarea placeholder="Your Message"></textarea>
-                    <input type="submit" value="Send">
-                </form>
-            </div>
-            <p class="copyright">
-                Copyright &copy; Rahul Vijayvargiya All Rights Reserved
-            </p>
-        </section>
-        <!-- End of Section 4 -->
-
-        <a href="#home" class="scroll-up-btn">
-            <i class="fas fa-arrow-up"></i>
-        </a>
     </div>
+  </header>
+  <nav class="navbar">
+    <a href="#" class="active">Client</a>
+    <a href="/productivity">Productivity</a>
+    <a href="#">FTE</a>
+    <a href="/sankey"><i class="fas fa-stream"></i> Sankey</a>
+  </nav>
+  <section class="metrics-grid">
+    <div class="metric-card">
+      <h3>ID Count</h3>
+      <p id="metric-id-count">Loading...</p>
+    </div>
+    <div class="metric-card">
+      <h3>GF Count</h3>
+      <p id="metric-gf-count">Loading...</p>
+    </div>
+    <div class="metric-card">
+      <h3>GFC Count</h3>
+      <p id="metric-gfc-count">Loading...</p>
+    </div>
+  </section>
+  <main class="chart-grid">
+    <div class="card" id="line-chart">
+      <div class="card-header">📈 ID Count Trend</div>
+      <div class="loading-spinner">Loading...</div>
+    </div>
+    <div class="card" id="bar-chart">
+      <div class="card-header">📊 GF Count by Month</div>
+      <div class="loading-spinner">Loading...</div>
+    </div>
+    <div class="card" id="area-chart">
+      <div class="card-header">🍭 GFC Count Trend</div>
+      <div class="loading-spinner">Loading...</div>
+    </div>
+    <div class="card" id="scatter-chart">
+      <div class="card-header">📊 ID Distribution</div>
+      <div class="loading-spinner">Loading...</div>
+    </div>
+  </main>
+  <div class="details-container" id="details">
+    <span class="close-details" onclick="closeDetails()">×</span>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('data-table')">Data Table</div>
+      <div class="tab" onclick="switchTab('overview')">Overview</div>
+    </div>
+    <div id="data-table" class="tab-content active">
+      <h3>Data Table</h3>
+      <div class="table-wrapper">
+        <table id="data-table-content">
+          <thead>
+            <tr>
+              <th>Label</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <button onclick="exportToExcel()">Export to CSV</button>
+    </div>
+    <div id="overview" class="tab-content">
+      <h3>Overview</h3>
+      <p id="overview-text">Click a chart to see detailed information here...</p>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+  <script>
+    if (window !== window.parent) {
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const height = document.body.scrollHeight;
+          window.parent.postMessage({ type: "resize-iframe", height }, "*");
+        }, 1500); // wait for charts to finish rendering
+      });
+    }
+  </script>
 
-    <script src="script.js"></script>
 </body>
+
 
 </html>

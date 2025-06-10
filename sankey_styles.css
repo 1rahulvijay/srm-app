@@ -34,6 +34,7 @@ body {
     --chart-bg: linear-gradient(180deg, rgba(59, 130, 246, 0.15), rgba(255, 255, 255, 0.1));
     --chart-gradient-start: #3b82f6;
     --chart-gradient-end: #93c5fd;
+    --secondary-color: #93c5fd; /* Added for Sankey link gradient */
 }
 
 body.light-theme {
@@ -47,6 +48,7 @@ body.light-theme {
     --chart-bg: linear-gradient(180deg, rgba(59, 130, 246, 0.15), rgba(255, 255, 255, 0.1));
     --chart-gradient-start: #3b82f6;
     --chart-gradient-end: #93c5fd;
+    --secondary-color: #93c5fd; /* Added for Sankey link gradient */
 }
 
 body.dark-theme {
@@ -60,6 +62,7 @@ body.dark-theme {
     --chart-bg: linear-gradient(180deg, rgba(96, 165, 250, 0.25), rgba(30, 30, 47, 0.15));
     --chart-gradient-start: #60a5fa;
     --chart-gradient-end: #a3bffa;
+    --secondary-color: #a3bffa; /* Added for Sankey link gradient */
 }
 
 body.corporate-theme {
@@ -73,6 +76,7 @@ body.corporate-theme {
     --chart-bg: linear-gradient(180deg, rgba(37, 99, 235, 0.25), rgba(30, 30, 47, 0.15));
     --chart-gradient-start: #2563eb;
     --chart-gradient-end: #7dd3fc;
+    --secondary-color: #7dd3fc; /* Added for Sankey link gradient */
 }
 
 body.neutral-theme {
@@ -86,6 +90,7 @@ body.neutral-theme {
     --chart-bg: linear-gradient(180deg, rgba(107, 114, 128, 0.15), rgba(255, 255, 255, 0.1));
     --chart-gradient-start: #6b7280;
     --chart-gradient-end: #9ca3af;
+    --secondary-color: #9ca3af; /* Added for Sankey link gradient */
 }
 
 /* Header */
@@ -95,18 +100,15 @@ header {
     align-items: center;
     background: var(--card);
     padding: 0.4rem 0.8rem;
-    /* Reduced padding */
     border-radius: 8px;
     box-shadow: var(--shadow);
     margin: 0.3rem;
-    /* Reduced margin */
     max-width: calc(100% - 0.6rem);
 }
 
 header h1 {
     margin: 0;
     font-size: 1.3rem;
-    /* Slightly smaller */
     font-weight: 600;
     color: var(--accent);
 }
@@ -114,15 +116,12 @@ header h1 {
 .header-actions {
     display: flex;
     gap: 0.3rem;
-    /* Reduced gap */
 }
 
-.theme-toggle,
-.refresh-data {
+.theme-toggle, .refresh-data {
     background: var(--accent);
     color: #fff;
     padding: 0.3rem 0.8rem;
-    /* Reduced padding */
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -131,58 +130,49 @@ header h1 {
     transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
 
-.theme-toggle:hover,
-.refresh-data:hover {
+.theme-toggle:hover, .refresh-data:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     background: color-mix(in srgb, var(--accent) 85%, white);
 }
 
+/* Navbar */
 .navbar {
     display: flex;
-    position: relative;
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(90deg, #4a6fa5, #81a1c1);
     padding: 0.4rem 1rem;
-    /* Reduced padding */
     border-radius: 8px;
-    /* Slightly smaller */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     margin: 0.3rem;
-    /* Reduced margin */
     max-width: calc(100% - 0.6rem);
     height: 40px;
-    gap: 1rem;
-    /* Reduced height */
-
 }
 
 .navbar a {
-  position: relative;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  z-index: 1;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }
 
-/* Make active tab visually wider using padding and background */
-.navbar a.active {
-  background: rgba(255, 255, 255, 0.15); /* or use var(--hover) */
-  padding-left: 2.4rem;
-  padding-right: 2.4rem;
-  margin-right: -1rem; /* overlap the next tab’s space */
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); /* optional glow */
+.navbar a:hover, .navbar a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
-
-
 
 .navbar a i {
     font-size: 1rem;
-    /* Smaller icon */
 }
 
 /* Metrics Grid */
@@ -190,9 +180,7 @@ header h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.3rem;
-    /* Reduced gap */
     margin: 0 0.3rem 0.3rem;
-    /* Reduced margin */
     max-width: calc(100% - 0.6rem);
 }
 
@@ -200,9 +188,7 @@ header h1 {
     background: var(--card);
     border: 1px solid var(--card-border);
     border-radius: 6px;
-    /* Smaller radius */
     padding: 0.5rem;
-    /* Reduced padding */
     text-align: center;
     box-shadow: var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -217,13 +203,11 @@ header h1 {
     font-size: var(--font-size-title);
     color: var(--accent);
     margin-bottom: 0.2rem;
-    /* Reduced margin */
     font-weight: 600;
 }
 
 .metric-card p {
     font-size: 0.9rem;
-    /* Slightly smaller */
     color: var(--fg);
     display: flex;
     justify-content: center;
@@ -236,83 +220,35 @@ header h1 {
 .metric-card p .trend-up {
     color: #22c55e;
     font-size: 1.2rem;
-    /* Smaller icon */
 }
 
 .metric-card p .trend-down {
     color: #ef4444;
     font-size: 1.2rem;
-    /* Smaller icon */
 }
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
-    }
-
-    50% {
-        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
-    }
-}
-
-
 
 /* Chart Grid */
 .chart-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    /* Default 2 columns */
+    grid-template-columns: 1fr; /* Override for Sankey page to ensure single column */
     gap: 0.3rem;
-    /* Reduced gap */
     padding: 0 0.3rem;
-    /* Reduced padding */
     max-width: calc(100% - 0.6rem);
 }
 
-/* Focus Mode: Hide UI Chrome and maximize charts */
-body.focus-mode header,
-body.focus-mode nav,
-body.focus-mode .header-actions {
-    display: none !important;
+#sankey-chart {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: stretch;
 }
 
-body.focus-mode .chart-grid {
-    grid-template-columns: 1fr !important;
-    padding: 1rem;
-}
-
-.chart-grid.dynamic-layout.grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.chart-grid.dynamic-layout.grid-3 {
-    grid-template-areas:
-        "big-chart big-chart"
-        "small-chart-1 small-chart-2";
-}
-
-.chart-grid.dynamic-layout.grid-3>.card:nth-child(1) {
-    grid-area: big-chart;
-}
-
-.chart-grid.dynamic-layout.grid-3>.card:nth-child(2) {
-    grid-area: small-chart-1;
-}
-
-.chart-grid.dynamic-layout.grid-3>.card:nth-child(3) {
-    grid-area: small-chart-2;
-}
-
-
+/* Card Styles */
 .card {
     background: var(--card);
     border: 1px solid var(--card-border);
     border-radius: 6px;
-    /* Smaller radius */
     padding: 0.4rem;
-    /* Reduced padding */
     box-shadow: var(--shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
@@ -331,7 +267,6 @@ body.focus-mode .chart-grid {
     color: var(--accent);
     text-align: center;
     margin-bottom: 0.4rem;
-    /* Reduced margin */
     text-transform: uppercase;
     letter-spacing: 0.2px;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
@@ -353,7 +288,6 @@ body.focus-mode .chart-grid {
     background: var(--card);
     color: var(--fg);
     padding: 0.6rem;
-    /* Reduced padding */
     border-top: 2px solid var(--accent);
     transition: bottom 0.3s ease-in-out;
     z-index: 1000;
@@ -369,16 +303,13 @@ body.focus-mode .chart-grid {
 .close-details {
     position: absolute;
     top: 6px;
-    /* Adjusted */
     right: 6px;
     cursor: pointer;
     font-size: 0.9rem;
-    /* Smaller */
     color: #fff;
     background: var(--accent);
     border-radius: 50%;
     width: 20px;
-    /* Smaller */
     height: 20px;
     display: flex;
     align-items: center;
@@ -393,19 +324,15 @@ body.focus-mode .chart-grid {
 .tabs {
     display: flex;
     gap: 0.3rem;
-    /* Reduced gap */
     margin-bottom: 0.4rem;
-    /* Reduced margin */
     flex-wrap: wrap;
 }
 
 .tab {
     padding: 0.3rem 0.8rem;
-    /* Reduced padding */
     cursor: pointer;
     background: var(--hover);
     border-radius: 4px;
-    /* Smaller radius */
     font-size: var(--font-size-base);
     transition: background 0.2s, color 0.2s;
 }
@@ -425,10 +352,8 @@ body.focus-mode .chart-grid {
 
 .table-wrapper {
     max-height: 150px;
-    /* Reduced height */
     overflow-y: auto;
     margin-bottom: 0.4rem;
-    /* Reduced margin */
     border: 1px solid var(--card-border);
     border-radius: 4px;
 }
@@ -439,10 +364,8 @@ table {
     font-size: var(--font-size-base);
 }
 
-th,
-td {
+th, td {
     padding: 0.3rem;
-    /* Reduced padding */
     text-align: left;
     border-bottom: 1px solid var(--card-border);
     color: var(--fg);
@@ -460,7 +383,6 @@ button {
     background: var(--accent);
     color: #fff;
     padding: 0.3rem 0.8rem;
-    /* Reduced padding */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -480,7 +402,6 @@ button:hover {
     background: var(--card);
     color: var(--fg);
     padding: 0.4rem;
-    /* Reduced padding */
     border-radius: 4px;
     font-size: var(--font-size-base);
     pointer-events: none;
@@ -490,7 +411,6 @@ button:hover {
     z-index: 9999;
     border: 1px solid var(--card-border);
     max-width: 180px;
-    /* Slightly smaller */
     line-height: 1.4;
 }
 
@@ -532,182 +452,11 @@ button:hover {
 }
 
 /* Media Queries for Responsive Design */
-@media (max-width: 1366px) {
-
-    /* 13" (2560x1600 scaled) */
+@media (max-width: 1366px) { /* 13" (2560x1600 scaled) */
     :root {
         --font-size-base: 10px;
         --font-size-title: 12px;
         --font-size-axis: 8px;
-    }
-
-    .chart-grid {
-        grid-template-columns: 1fr;
-        /* Single column for smaller screens */
-    }
-
-    .card svg {
-        height: 200px;
-        /* Reduced from 216px to fit better */
-    }
-
-    .metrics-grid,
-    .chart-grid {
-        gap: 0.2rem;
-        /* Further reduced gap */
-    }
-
-    .navbar {
-        padding: 0.3rem 0.8rem;
-        /* Further reduced */
-        height: 50px;
-        /* Adjusted */
-    }
-
-    .navbar a {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-    }
-}
-
-@media (min-width: 1367px) and (max-width: 1920px) {
-
-    /* 15.6" (1920x1080), 16" (2560x1600 scaled) */
-    :root {
-        --font-size-base: 12px;
-        --font-size-title: 14px;
-        --font-size-axis: 10px;
-    }
-
-    .card svg {
-        height: 240px;
-    }
-
-    .navbar {
-        padding: 0.6rem 1.5rem;
-        height: 70px;
-    }
-
-    .navbar a {
-        font-size: 1.1rem;
-        padding: 0.6rem 1.2rem;
-    }
-}
-
-@media (min-width: 1921px) and (max-width: 2560px) {
-
-    /* 24" (1920x1200) */
-    :root {
-        --font-size-base: 14px;
-        --font-size-title: 16px;
-        --font-size-axis: 12px;
-    }
-
-    .card svg {
-        height: 288px;
-    }
-
-    .navbar {
-        padding: 0.7rem 1.8rem;
-        height: 80px;
-    }
-
-    .navbar a {
-        font-size: 1.2rem;
-        padding: 0.7rem 1.5rem;
-    }
-}
-
-@media (min-width: 2561px) and (max-width: 3440px) {
-
-    /* 32" (3840x2160) */
-    :root {
-        --font-size-base: 16px;
-        --font-size-title: 18px;
-        --font-size-axis: 14px;
-    }
-
-    .card svg {
-        height: 312px;
-    }
-
-    .navbar {
-        padding: 0.8rem 2rem;
-        height: 90px;
-    }
-
-    .navbar a {
-        font-size: 1.3rem;
-        padding: 0.8rem 1.8rem;
-    }
-}
-
-@media (min-width: 3441px) {
-
-    /* 34" (3440x1440) */
-    :root {
-        --font-size-base: 18px;
-        --font-size-title: 20px;
-        --font-size-axis: 16px;
-    }
-
-    .card svg {
-        height: 336px;
-    }
-
-    .navbar {
-        padding: 0.9rem 2.5rem;
-        height: 100px;
-    }
-
-    .navbar a {
-        font-size: 1.4rem;
-        padding: 0.9rem 2rem;
-    }
-}
-
-/* Media Queries for Responsive Design
-@media (max-width: 768px) {
-    .navbar {
-        position: sticky;
-        top: 0;
-        height: auto;
-        padding: 0.3rem 0.8rem;
-    }
-    .navbar .menu-toggle {
-        display: block;
-    }
-    .navbar .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: linear-gradient(90deg, var(--navbar-gradient-start), var(--navbar-gradient-end));
-        padding: 0.5rem;
-        border-radius: 0 0 8px 8px;
-    }
-    .navbar .nav-links.active {
-        display: flex;
-    }
-    .navbar .nav-links.active + .theme-toggle {
-        margin-top: 0.5rem;
-    }
-    .navbar a {
-        font-size: 1rem;
-        padding: 0.5rem;
-    }
-}
-
-@media (max-width: 1366px) {
-    :root {
-        --font-size-base: 10px;
-        --font-size-title: 12px;
-        --font-size-axis: 8px;
-    }
-    .chart-grid {
-        grid-template-columns: 1fr;
     }
     .card svg {
         height: 200px;
@@ -725,7 +474,7 @@ button:hover {
     }
 }
 
-@media (min-width: 1367px) and (max-width: 1920px) {
+@media (min-width: 1367px) and (max-width: 1920px) { /* 15.6" (1920x1080), 16" (2560x1600 scaled) */
     :root {
         --font-size-base: 12px;
         --font-size-title: 14px;
@@ -744,7 +493,7 @@ button:hover {
     }
 }
 
-@media (min-width: 1921px) and (max-width: 2560px) {
+@media (min-width: 1921px) and (max-width: 2560px) { /* 24" (1920x1200) */
     :root {
         --font-size-base: 14px;
         --font-size-title: 16px;
@@ -763,7 +512,7 @@ button:hover {
     }
 }
 
-@media (min-width: 2561px) and (max-width: 3440px) {
+@media (min-width: 2561px) and (max-width: 3440px) { /* 32" (3840x2160) */
     :root {
         --font-size-base: 16px;
         --font-size-title: 18px;
@@ -782,220 +531,13 @@ button:hover {
     }
 }
 
-@media (min-width: 3441px) {
+@media (min-width: 3441px) { /* 34" (3440x1440) */
     :root {
         --font-size-base: 18px;
         --font-size-title: 20px;
         --font-size-axis: 16px;
     }
-    .card svg {:root {
-    --bg: #f4f7fa;
-    --fg: #2c3e50;
-    --primary: #3498db;
-    --chart-gradient-start: #3498db;
-    --chart-gradient-end: #2980b9;
-    --card-bg: #fff;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-}
-
-body.dark-theme {
-    --bg: #2c3e50;
-    --fg: #ecf0f1;
-    --primary: #3498db;
-    --chart-gradient-start: #3498db;
-    --chart-gradient-end: #2980b9;
-    --card-bg: #34495e;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--fg);
-    transition: var(--transition);
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-    background: var(--primary);
-    color: white;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.header-actions {
-    display: flex;
-    gap: 10px;
-}
-
-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background: white;
-    color: var(--primary);
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-button:hover {
-    background: #e0e0e0;
-}
-
-.navbar {
-    display: flex;
-    padding: 10px 20px;
-    background: #ecf0f1;
-    border-bottom: 1px solid #ddd;
-}
-
-.navbar a {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-    color: var(--fg);
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.navbar a.active {
-    background: var(--primary);
-    color: white;
-    border-radius: 4px;
-}
-
-.navbar a i {
-    margin-right: 5px;
-}
-
-.metrics-grid, .chart-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.metric-card, .card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.metric-card h3 {
-    margin: 0 0 10px;
-    font-size: 18px;
-}
-
-.metric-card p {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.card .card-header {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.loading-spinner {
-    display: none;
-    text-align: center;
-    color: #888;
-}
-
-.details-container {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    width: 80%;
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-.close-details {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.tab {
-    padding: 8px 16px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-}
-
-.tab.active {
-    border-bottom: 2px solid var(--primary);
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.table-wrapper {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.trend-up {
-    color: #27ae60;
-}
-
-.trend-down {
-    color: #e74c3c;
-}
-
-.tooltip {
-    position: fixed;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px;
-    border-radius: 4px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+    .card svg {
         height: 336px;
     }
     .navbar {
@@ -1006,31 +548,4 @@ th, td {
         font-size: 1.4rem;
         padding: 0.9rem 2rem;
     }
-} */
-
-.embedded-mode header,
-.embedded-mode .navbar,
-.embedded-mode .header-actions,
-.embedded-mode button.theme-toggle,
-.embedded-mode button.refresh-data,
-.embedded-mode button.export-pdf,
-.embedded-mode .details-container,
-.embedded-mode .tooltip {
-    display: none !important;
-}
-
-.embedded-mode body {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: white;
-}
-
-.embedded-mode .card {
-    margin-top: 0 !important;
-    box-shadow: none !important;
-}
-
-.embedded-mode html,
-.embedded-mode body {
-    overflow: hidden !important;
 }

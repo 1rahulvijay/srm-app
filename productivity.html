@@ -1,0 +1,89 @@
+<script>
+    const isEmbedded = new URLSearchParams(window.location.search).get("embed") === "true";
+    if (isEmbedded) {
+        document.documentElement.classList.add("embedded-mode");
+    }
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsightDash - Productivity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body class="light-theme">
+    <header>
+        <h1>InsightDash - Productivity</h1>
+        <div class="header-actions">
+            <button class="theme-toggle" onclick="cycleTheme()">Toggle Theme</button>
+            <button class="refresh-data" onclick="refreshData()">Refresh Data</button>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="/"><i class="fas fa-tachometer-alt"></i>Client</a>
+        <a href="/productivity" class="active"><i class="fas fa-chart-line"></i> Productivity</a>
+        <a href="/fte"><i class="fas fa-briefcase"></i> FTE</a>
+        <a href="/sankey"><i class="fas fa-stream"></i> Sankey</a>
+    </nav>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>Tasks Completed</h3>
+            <p id="metric-tasks-completed">Loading...</p>
+        </div>
+        <div class="metric-card">
+            <h3>Avg Completion Time</h3>
+            <p id="metric-avg-completion-time">Loading...</p>
+        </div>
+        <div class="metric-card">
+            <h3>Efficiency Rate</h3>
+            <p id="metric-efficiency-rate">Loading...</p>
+        </div>
+    </div>
+
+    <div class="chart-grid">
+        <div class="card">
+            <div class="card-header">📈 Tasks Completed Trend</div>
+            <div id="line-chart" class="chart-container"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">📊 Avg Completion Time by Month</div>
+            <div id="bar-chart" class="chart-container"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">🍭 Efficiency Rate Trend</div>
+            <div id="area-chart" class="chart-container"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script>
+        // Initialize charts immediately
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM fully loaded, initializing charts...');
+            initializeCharts();
+        });
+    </script>
+    <script>
+        if (window !== window.parent) {
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const height = document.body.scrollHeight;
+                    window.parent.postMessage({ type: "resize-iframe", height }, "*");
+                }, 1500); // wait for charts to finish rendering
+            });
+        }
+    </script>
+
+</body>
+
+</html>

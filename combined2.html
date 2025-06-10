@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>InsightDash Combined PDF</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: white;
+        }
+
+        iframe.iframe-section {
+            width: 100%;
+            border: none;
+            display: block;
+            page-break-after: always;
+        }
+
+        @media print {
+            iframe.iframe-section {
+                height: 100vh !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <iframe class="iframe-section" src="/?embed=true" title="Home Dashboard"></iframe>
+    <iframe class="iframe-section" src="/productivity?embed=true" title="Productivity Dashboard"></iframe>
+    <iframe class="iframe-section" src="/fte?embed=true" title="FTE Dashboard"></iframe>
+    <iframe class="iframe-section" src="/sankey?embed=true" title="Sankey Dashboard"></iframe>
+
+    <script>
+        // Dynamic iframe resizing after load
+        window.addEventListener("message", (event) => {
+            if (event.data.type === "resize-iframe") {
+                const iframes = document.querySelectorAll("iframe");
+                for (const iframe of iframes) {
+                    if (iframe.contentWindow === event.source) {
+                        iframe.style.height = event.data.height + "px";
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

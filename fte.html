@@ -1,0 +1,122 @@
+<script>
+    const isEmbedded = new URLSearchParams(window.location.search).get("embed") === "true";
+    if (isEmbedded) {
+        document.documentElement.classList.add("embedded-mode");
+    }
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsightDash - FTE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"
+        integrity="sha384-1J9L8e9z0z1v1J9L8e9z0z1v1J9L8e9z0z1v1J9L8e9z0z1v1J9L8e9z0z1v1J9" crossorigin="anonymous"
+        onload="console.log('[FTE.html] D3.js loaded successfully')"
+        onerror="console.error('[FTE.html] Failed to load D3.js')"></script>
+</head>
+
+<body class="light-theme">
+    <header>
+        <h1>InsightDash - FTE</h1>
+        <div class="header-actions">
+            <button class="theme-toggle" onclick="cycleTheme()">Toggle Theme</button>
+            <button class="refresh-data" onclick="refreshData()">Refresh Data</button>
+            <button class="focus-mode-toggle" onclick="toggleFocusMode()">Focus Mode</button>
+
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="/"><i class="fas fa-users"></i> Client</a>
+        <a href="/productivity"><i class="fas fa-chart-line"></i> Productivity</a>
+        <a href="/fte" class="active"><i class="fas fa-briefcase"></i> FTE</a>
+        <a href="/sankey"><i class="fas fa-stream"></i> Sankey</a>
+    </nav>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>Total FTE</h3>
+            <p id="metric-total-fte"><span class="loading-spinner">Loading...</span></p>
+        </div>
+        <div class="metric-card">
+            <h3>Utilization</h3>
+            <p id="metric-utilization"><span class="loading-spinner">Loading...</span></p>
+        </div>
+        <div class="metric-card">
+            <h3>Overtime Hours</h3>
+            <p id="metric-overtime-hours"><span class="loading-spinner">Loading...</span></p>
+        </div>
+    </div>
+
+    <div class="chart-grid">
+        <div class="card">
+            <div class="card-header">📈 Total FTE Trend</div>
+            <div id="line-chart" class="loading-spinner">Loading...</div>
+        </div>
+        <div class="card">
+            <div class="card-header">📊 Utilization by Month</div>
+            <div id="bar-chart" class="loading-spinner">Loading...</div>
+        </div>
+        <div class="card">
+            <div class="card-header">🍭 Overtime Hours Trend</div>
+            <div id="area-chart" class="loading-spinner">Loading...</div>
+        </div>
+    </div>
+
+    <div class="details-container" id="details">
+        <span class="close-details" onclick="closeDetails()">×</span>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('data-table')">Data Table</div>
+            <div class="tab" onclick="switchTab('overview')">Overview</div>
+        </div>
+        <div class="tab-content active" id="data-table">
+            <div class="table-wrapper">
+                <table id="data-table-content">
+                    <thead>
+                        <tr>
+                            <th>Label</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <button onclick="exportToExcel()">Export to CSV</button>
+        </div>
+        <div class="tab-content" id="overview">
+            <p id="overview-text">Click a chart to see detailed information here...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+    <script>
+        // Move debug logging after dashboard.js loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('[FTE.html] Page loaded, DOM ready state:', document.readyState);
+            console.log('[FTE.html] Chart containers present:',
+                document.querySelector('#line-chart') ? 'Yes' : 'No',
+                document.querySelector('#bar-chart') ? 'Yes' : 'No',
+                document.querySelector('#area-chart') ? 'Yes' : 'No');
+        });
+    </script>
+    <script>
+        if (window !== window.parent) {
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const height = document.body.scrollHeight;
+                    window.parent.postMessage({ type: "resize-iframe", height }, "*");
+                }, 1500); // wait for charts to finish rendering
+            });
+        }
+    </script>
+
+</body>
+
+</html>

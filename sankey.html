@@ -1,0 +1,93 @@
+<script>
+    const isEmbedded = new URLSearchParams(window.location.search).get("embed") === "true";
+    if (isEmbedded) {
+        document.documentElement.classList.add("embedded-mode");
+    }
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsightDash - Sankey</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}" defer></script>
+
+</head>
+
+<body class="light-theme">
+    <header>
+        <h1>InsightDash - Sankey</h1>
+        <div class="header-actions">
+            <button class="theme-toggle" onclick="cycleTheme()">Toggle Theme</button>
+            <button class="refresh-data" onclick="refreshCharts()">Refresh Data</button>
+            <button class="export-pdf" onclick="exportToPDF()">Export to PDF</button>
+        </div>
+    </header>
+    <nav class="navbar">
+        <a href="/" class="tab">Client</a>
+        <a href="/productivity" class="tab">Productivity</a>
+        <a href="/fte" class="tab">FTE</a>
+        <a href="/sankey" class="tab active">Sankey</a>
+    </nav>
+    <div class="chart-grid">
+        <div class="card">
+            <div class="card-header">📊 Client Flow Sankey Diagram</div>
+            <div id="sankey-chart"></div>
+        </div>
+    </div>
+    <div id="details" class="details-container">
+        <span class="close-details" onclick="closeDetails()">×</span>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('data-table')">Data Table</div>
+            <div class="tab" onclick="switchTab('overview')">Overview</div>
+        </div>
+        <div id="data-table" class="tab-content active">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Source</th>
+                            <th>Target</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data-table-content"></tbody>
+                </table>
+            </div>
+            <button onclick="exportToExcel()">Export to CSV</button>
+        </div>
+        <div id="overview" class="tab-content">
+            <p id="overview-text">Click a chart to view details to see detailed information here...</p>
+        </div>
+    </div>
+    <div class="tooltip" style="display:none; position:absolute;"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            drawCharts();
+        });
+    </script>
+    <script>
+        if (window !== window.parent) {
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const height = document.body.scrollHeight;
+                    window.parent.postMessage({ type: "resize-iframe", height }, "*");
+                }, 1500); // wait for charts to finish rendering
+            });
+        }
+    </script>
+
+</body>
+
+</html>
